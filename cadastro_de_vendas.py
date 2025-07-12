@@ -7,7 +7,7 @@ st.set_page_config(page_title='Cadastrar Vendas', layout='wide')
 conn = st.connection('postgres', type='sql')
 
 if not 'client_order' in st.session_state:
-    st.session_state['client_order'] = {'COCA': 0, 'ÁGUA':0, 'GUARANÁ': 0, 'SUCO': 0, 'CHOPP': 0, 'PROMO CHOPP': 0, 'VINHO': 0, 'PROMO VINHO': 0, 'GUARAVITA': 0}
+    st.session_state['client_order'] = {'COCA': 0, 'AGUA':0, 'GUARANA': 0, 'SUCO': 0, 'CHOPP': 0, 'PROMO CHOPP': 0, 'VINHO': 0, 'PROMO VINHO': 0, 'GUARAVITA': 0}
 
 
 def get_unit_values(_conn):
@@ -33,8 +33,8 @@ with st.container(border=True):
 
     add_buttons_column, delete_buttons_column, sumary_col = st.columns(3, vertical_alignment='center')
     add_coca = add_buttons_column.button('+1 COCA')
-    add_agua = add_buttons_column.button('+1 ÁGUA')
-    add_guarana = add_buttons_column.button('+1 GUARANÁ')
+    add_agua = add_buttons_column.button('+1 AGUA')
+    add_guarana = add_buttons_column.button('+1 GUARANA')
     add_suco = add_buttons_column.button('+1 SUCO')
     add_chopp = add_buttons_column.button('+1 CHOPP')
     add_promo_chopp = add_buttons_column.button('+1 PROMO CHOPP')
@@ -43,8 +43,8 @@ with st.container(border=True):
     add_guaravita = add_buttons_column.button('+1 GUARAVITA')
 
     delete_coca = delete_buttons_column.button('-1 COCA')
-    delete_agua = delete_buttons_column.button('-1 ÁGUA')
-    delete_guarana = delete_buttons_column.button('-1 GUARANÁ')
+    delete_agua = delete_buttons_column.button('-1 AGUA')
+    delete_guarana = delete_buttons_column.button('-1 GUARANA')
     delete_suco = delete_buttons_column.button('-1 SUCO')
     delete_chopp = delete_buttons_column.button('-1 CHOPP')
     delete_promo_chopp = delete_buttons_column.button('-1 PROMO CHOPP')
@@ -56,10 +56,10 @@ with st.container(border=True):
         st.session_state['client_order']['COCA'] += 1
     
     if add_agua:
-        st.session_state['client_order']['ÁGUA'] += 1
+        st.session_state['client_order']['AGUA'] += 1
     
     if add_guarana:
-        st.session_state['client_order']['GUARANÁ'] += 1
+        st.session_state['client_order']['GUARANA'] += 1
 
     if add_suco:
         st.session_state['client_order']['SUCO'] += 1
@@ -84,12 +84,12 @@ with st.container(border=True):
             st.session_state['client_order']['COCA'] -= 1
 
     if delete_agua:
-        if st.session_state['client_order']['ÁGUA'] > 0:
-            st.session_state['client_order']['ÁGUA'] -= 1
+        if st.session_state['client_order']['AGUA'] > 0:
+            st.session_state['client_order']['AGUA'] -= 1
     
     if delete_guarana:
-        if st.session_state['client_order']['GUARANÁ'] > 0:
-            st.session_state['client_order']['GUARANÁ'] -= 1
+        if st.session_state['client_order']['GUARANA'] > 0:
+            st.session_state['client_order']['GUARANA'] -= 1
     if delete_chopp:
         if st.session_state['client_order']['CHOPP'] > 0:
             st.session_state['client_order']['CHOPP'] -= 1
