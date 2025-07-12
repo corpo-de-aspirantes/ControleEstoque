@@ -167,10 +167,8 @@ with st.container(border=True):
                     suco_maracuja = st.session_state['client_order']['SUCO MARACUJA'],
                     suco_pessego = st.session_state['client_order']['SUCO PESSEGO'],
                     suco_manga = st.session_state['client_order']['SUCO MANGA'],  # Novo campo
-                    chopp = st.session_state['client_order']['CHOPP'],
-                    promo_chopp = st.session_state['client_order']['PROMO CHOPP'],
-                    vinho = st.session_state['client_order']['VINHO'],
-                    promo_vinho = st.session_state['client_order']['PROMO VINHO'],
+                    chopp = st.session_state['client_order']['CHOPP'] + 3*st.session_state['client_order']['PROMO CHOPP'],
+                    vinho = st.session_state['client_order']['VINHO'] + 2*st.session_state['client_order']['PROMO VINHO'],
                     guaravita = st.session_state['client_order']['GUARAVITA'],
                     total_value = total_order_value
                 )
