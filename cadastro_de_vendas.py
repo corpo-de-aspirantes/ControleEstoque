@@ -135,8 +135,8 @@ with st.container(border=True):
             session.add(
                 Vendas(
                     coca = st.session_state['client_order']['COCA'],
-                    agua = st.session_state['client_order']['ÁGUA'],
-                    guarana = st.session_state['client_order']['GUARANÁ'],
+                    agua = st.session_state['client_order']['AGUA'],
+                    guarana = st.session_state['client_order']['GUARANA'],
                     suco = st.session_state['client_order']['SUCO'],
                     chopp = st.session_state['client_order']['CHOPP'],
                     promo_chopp = st.session_state['client_order']['PROMO CHOPP'],
@@ -149,5 +149,5 @@ with st.container(border=True):
 
             session.commit()
 
-        st.session_state['client_order'] = {'COCA': 0, 'ÁGUA':0, 'GUARANÁ': 0, 'SUCO': 0, 'CHOPP': 0, 'PROMO CHOPP': 0, 'VINHO': 0, 'PROMO VINHO': 0, 'GUARAVITA': 0}
+        st.session_state['client_order'] = {'COCA': 0, 'AGUA':0, 'GUARANA': 0, 'SUCO': 0, 'CHOPP': 0, 'PROMO CHOPP': 0, 'VINHO': 0, 'PROMO VINHO': 0, 'GUARAVITA': 0}
         st.rerun()
