@@ -141,7 +141,7 @@ with st.container(border=True):
                         session.commit()
                     elif item == 'PROMO VINHO':
                         product_data = session.query(Products).filter(Products.product_name == 'VINHO').scalar()
-                        statement2 = update(Products).where(Products.product_name == 'VINHO').values(quantity=product_data.quantity-st.session_state['client_order'][item]*3)
+                        statement2 = update(Products).where(Products.product_name == 'VINHO').values(quantity=product_data.quantity-st.session_state['client_order'][item]*2)
                         session.execute(statement2)
                         session.commit()
                     else:
