@@ -21,6 +21,8 @@ product_keys = {'COCA': 'coca', 'AGUA': 'agua', 'GUARANA':'guarana', 'SUCO MARAC
 with st.expander(expanded=True, label='Produtos em Estoque'):
     product_columns = st.columns(3, vertical_alignment='top') if num_products >= 3 else st.columns(num_products, vertical_alignment='center')
     for  index, product in enumerate(products):
+        if product.product_name not in product_keys:
+            continue
         total_sales_units = df_sales[product_keys[product.product_name]].sum()
         total_sales_value = total_sales_units * product.unit_value
         with product_columns[index % 3].container(border=True):
