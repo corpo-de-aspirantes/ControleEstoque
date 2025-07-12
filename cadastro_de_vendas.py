@@ -7,7 +7,7 @@ st.set_page_config(page_title='Cadastrar Vendas', layout='wide')
 conn = st.connection('postgres', type='sql')
 
 if not 'client_order' in st.session_state:
-    st.session_state['client_order'] = {'COCA': 0, 'AGUA':0, 'GUARANA': 0, 'SUCO MARACUJA': 0, 'SUCO PESSEGO': 0, 'CHOPP': 0, 'VINHO': 0, 'GUARAVITA': 0}
+    st.session_state['client_order'] = {'COCA': 0, 'AGUA':0, 'GUARANA': 0, 'SUCO MARACUJA': 0, 'SUCO PESSEGO': 0, 'SUCO MANGA': 0, 'CHOPP': 0, 'VINHO': 0, 'GUARAVITA': 0, 'PROMO CHOPP': 0, 'PROMO VINHO': 0}
 
 
 def get_unit_values(_conn):
@@ -37,6 +37,7 @@ with st.container(border=True):
     add_guarana = add_buttons_column.button('+1 GUARANA')
     add_suco_maracuja = add_buttons_column.button('+1 SUCO MARACUJA')
     add_suco_pessego = add_buttons_column.button('+1 SUCO PESSEGO')
+    add_suco_manga = add_buttons_column.button('+1 SUCO MANGA')
     add_chopp = add_buttons_column.button('+1 CHOPP')
     add_promo_chopp = add_buttons_column.button('+1 PROMO CHOPP')
     add_vinho = add_buttons_column.button('+1 VINHO')
@@ -48,6 +49,7 @@ with st.container(border=True):
     delete_guarana = delete_buttons_column.button('-1 GUARANA')
     delete_suco_maracuja = delete_buttons_column.button('-1 SUCO MARACUJA')
     delete_suco_pessego = delete_buttons_column.button('-1 SUCO PESSEGO')
+    delete_suco_manga = delete_buttons_column.button('-1 SUCO MANGA')
     delete_chopp = delete_buttons_column.button('-1 CHOPP')
     delete_promo_chopp = delete_buttons_column.button('-1 PROMO CHOPP')
     delete_vinho = delete_buttons_column.button('-1 VINHO')
@@ -68,6 +70,9 @@ with st.container(border=True):
 
     if add_suco_pessego:
         st.session_state['client_order']['SUCO PESSEGO'] += 1
+
+    if add_suco_manga:
+        st.session_state['client_order']['SUCO MANGA'] += 1
 
     if add_chopp:
         st.session_state['client_order']['CHOPP'] += 1
@@ -113,6 +118,9 @@ with st.container(border=True):
     if delete_suco_pessego:
         if st.session_state['client_order']['SUCO PESSEGO'] > 0:
             st.session_state['client_order']['SUCO PESSEGO'] -= 1
+    if delete_suco_manga:
+        if st.session_state['client_order']['SUCO MANGA'] > 0:
+            st.session_state['client_order']['SUCO MANGA'] -= 1
 
     if delete_guaravita:
         if st.session_state['client_order']['GUARAVITA'] > 0:
@@ -158,6 +166,7 @@ with st.container(border=True):
                     guarana = st.session_state['client_order']['GUARANA'],
                     suco_maracuja = st.session_state['client_order']['SUCO MARACUJA'],
                     suco_pessego = st.session_state['client_order']['SUCO PESSEGO'],
+                    suco_manga = st.session_state['client_order']['SUCO MANGA'],  # Novo campo
                     chopp = st.session_state['client_order']['CHOPP'],
                     promo_chopp = st.session_state['client_order']['PROMO CHOPP'],
                     vinho = st.session_state['client_order']['VINHO'],
@@ -169,5 +178,5 @@ with st.container(border=True):
 
             session.commit()
 
-        st.session_state['client_order'] = {'COCA': 0, 'AGUA':0, 'GUARANA': 0, 'SUCO MARACUJA': 0, 'SUCO PESSEGO': 0, 'CHOPP': 0, 'PROMO CHOPP': 0, 'VINHO': 0, 'PROMO VINHO': 0, 'GUARAVITA': 0}
+        st.session_state['client_order'] = {'COCA': 0, 'AGUA':0, 'GUARANA': 0, 'SUCO MARACUJA': 0, 'SUCO PESSEGO': 0, 'SUCO MANGA': 0, 'CHOPP': 0, 'PROMO CHOPP': 0, 'VINHO': 0, 'PROMO VINHO': 0, 'GUARAVITA': 0}
         st.rerun()

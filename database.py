@@ -24,6 +24,7 @@ class Vendas(BaseClass):
     vinho = Column('vinho', Integer)
     suco_maracuja = Column('suco_maracuja', Integer)
     suco_pessego = Column('suco_pessego', Integer)
+    suco_manga = Column('suco_manga', Integer)  # Novo campo
     guaravita = Column('guaravita', Integer)
     total_value = Column('total_value', Float)
 

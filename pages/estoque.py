@@ -16,7 +16,7 @@ st.header('FEEDBACK DE VENDAS')
 
 df_sales = pd.read_sql_table('historico_de_vendas', con=create_engine(st.secrets['connections']['postgres']['url']))
 
-product_keys = {'COCA': 'coca', 'AGUA': 'agua', 'GUARANA':'guarana', 'SUCO MARACUJA': 'suco_maracuja', 'SUCO PESSEGO': 'suco_pessego', 'CHOPP': 'chopp', 'VINHO':'vinho', 'GUARAVITA':'guaravita'}
+product_keys = {'COCA': 'coca', 'AGUA': 'agua', 'GUARANA':'guarana', 'SUCO MARACUJA': 'suco_maracuja', 'SUCO PESSEGO': 'suco_pessego', 'SUCO MANGA': 'suco_manga', 'CHOPP': 'chopp', 'VINHO':'vinho', 'GUARAVITA':'guaravita'}
 
 with st.expander(expanded=True, label='Produtos em Estoque'):
     product_columns = st.columns(3, vertical_alignment='top') if num_products >= 3 else st.columns(num_products, vertical_alignment='center')
@@ -44,6 +44,7 @@ with st.expander(expanded=True, label='Registro de Vendas'):
                      'guarana': st.column_config.NumberColumn('GUARANA'),
                      'suco_maracuja': st.column_config.NumberColumn('SUCO MARACUJA'),
                      'suco_pessego': st.column_config.NumberColumn('SUCO PESSEGO'),
+                     'suco_manga': st.column_config.NumberColumn('SUCO MANGA'), # Novo campo
                      'chopp': st.column_config.NumberColumn('CHOPP'),
                      'vinho': st.column_config.NumberColumn('VINHO'),
                      'guaravita': st.column_config.NumberColumn('GUARAVITA'),
