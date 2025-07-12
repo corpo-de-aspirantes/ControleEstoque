@@ -21,10 +21,9 @@ class Vendas(BaseClass):
     agua = Column('agua', Integer)
     guarana = Column('guarana', Integer)
     chopp = Column('chopp', Integer)
-    promo_chopp = Column('promo_chopp', Integer)
     vinho = Column('vinho', Integer)
-    promo_vinho = Column('promo_vinho', Integer)
-    suco = Column('suco', Integer)
+    suco_maracuja = Column('suco_maracuja', Integer)
+    suco_pessego = Column('suco_pessego', Integer)
     guaravita = Column('guaravita', Integer)
     total_value = Column('total_value', Float)
 

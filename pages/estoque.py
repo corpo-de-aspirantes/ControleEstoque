@@ -16,7 +16,7 @@ st.header('FEEDBACK DE VENDAS')
 
 df_sales = pd.read_sql_table('historico_de_vendas', con=create_engine(st.secrets['connections']['postgres']['url']))
 
-product_keys = {'COCA': 'coca', 'AGUA': 'agua', 'GUARANA':'guarana', 'SUCO': 'suco', 'CHOPP': 'chopp', 'PROMO CHOPP': 'promo_chopp', 'VINHO':'vinho', 'PROMO VINHO':'promo_vinho', 'GUARAVITA':'guaravita'}
+product_keys = {'COCA': 'coca', 'AGUA': 'agua', 'GUARANA':'guarana', 'SUCO MARACUJA': 'suco_maracuja', 'SUCO PESSEGO': 'suco_pessego', 'CHOPP': 'chopp', 'VINHO':'vinho', 'GUARAVITA':'guaravita'}
 
 with st.expander(expanded=True, label='Produtos em Estoque'):
     product_columns = st.columns(3, vertical_alignment='top') if num_products >= 3 else st.columns(num_products, vertical_alignment='center')
@@ -42,11 +42,10 @@ with st.expander(expanded=True, label='Registro de Vendas'):
                      'coca': st.column_config.NumberColumn('COCA'),
                      'agua': st.column_config.NumberColumn('AGUA'),
                      'guarana': st.column_config.NumberColumn('GUARANA'),
-                     'suco': st.column_config.NumberColumn('SUCO'),
+                     'suco_maracuja': st.column_config.NumberColumn('SUCO MARACUJA'),
+                     'suco_pessego': st.column_config.NumberColumn('SUCO PESSEGO'),
                      'chopp': st.column_config.NumberColumn('CHOPP'),
-                     'promo_chopp': st.column_config.NumberColumn('PROMO CHOPP'),
                      'vinho': st.column_config.NumberColumn('VINHO'),
-                     'promo_vinho': st.column_config.NumberColumn('PROMO VINHO'),
                      'guaravita': st.column_config.NumberColumn('GUARAVITA'),
                      'total_value': st.column_config.NumberColumn('VALOR DA VENDA')
                  })

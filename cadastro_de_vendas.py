@@ -7,7 +7,7 @@ st.set_page_config(page_title='Cadastrar Vendas', layout='wide')
 conn = st.connection('postgres', type='sql')
 
 if not 'client_order' in st.session_state:
-    st.session_state['client_order'] = {'COCA': 0, 'AGUA':0, 'GUARANA': 0, 'SUCO': 0, 'CHOPP': 0, 'PROMO CHOPP': 0, 'VINHO': 0, 'PROMO VINHO': 0, 'GUARAVITA': 0}
+    st.session_state['client_order'] = {'COCA': 0, 'AGUA':0, 'GUARANA': 0, 'SUCO MARACUJA': 0, 'SUCO PESSEGO': 0, 'CHOPP': 0, 'VINHO': 0, 'GUARAVITA': 0}
 
 
 def get_unit_values(_conn):
@@ -35,7 +35,8 @@ with st.container(border=True):
     add_coca = add_buttons_column.button('+1 COCA')
     add_agua = add_buttons_column.button('+1 AGUA')
     add_guarana = add_buttons_column.button('+1 GUARANA')
-    add_suco = add_buttons_column.button('+1 SUCO')
+    add_suco_maracuja = add_buttons_column.button('+1 SUCO MARACUJA')
+    add_suco_pessego = add_buttons_column.button('+1 SUCO PESSEGO')
     add_chopp = add_buttons_column.button('+1 CHOPP')
     add_promo_chopp = add_buttons_column.button('+1 PROMO CHOPP')
     add_vinho = add_buttons_column.button('+1 VINHO')
@@ -45,7 +46,8 @@ with st.container(border=True):
     delete_coca = delete_buttons_column.button('-1 COCA')
     delete_agua = delete_buttons_column.button('-1 AGUA')
     delete_guarana = delete_buttons_column.button('-1 GUARANA')
-    delete_suco = delete_buttons_column.button('-1 SUCO')
+    delete_suco_maracuja = delete_buttons_column.button('-1 SUCO MARACUJA')
+    delete_suco_pessego = delete_buttons_column.button('-1 SUCO PESSEGO')
     delete_chopp = delete_buttons_column.button('-1 CHOPP')
     delete_promo_chopp = delete_buttons_column.button('-1 PROMO CHOPP')
     delete_vinho = delete_buttons_column.button('-1 VINHO')
@@ -61,8 +63,11 @@ with st.container(border=True):
     if add_guarana:
         st.session_state['client_order']['GUARANA'] += 1
 
-    if add_suco:
-        st.session_state['client_order']['SUCO'] += 1
+    if add_suco_maracuja:
+        st.session_state['client_order']['SUCO MARACUJA'] += 1
+
+    if add_suco_pessego:
+        st.session_state['client_order']['SUCO PESSEGO'] += 1
 
     if add_chopp:
         st.session_state['client_order']['CHOPP'] += 1
@@ -102,9 +107,12 @@ with st.container(border=True):
     if delete_promo_vinho:
         if st.session_state['client_order']['PROMO VINHO'] > 0:
             st.session_state['client_order']['PROMO VINHO'] -= 1
-    if delete_suco:
-        if st.session_state['client_order']['SUCO'] > 0:
-            st.session_state['client_order']['SUCO'] -= 1
+    if delete_suco_maracuja:
+        if st.session_state['client_order']['SUCO MARACUJA'] > 0:
+            st.session_state['client_order']['SUCO MARACUJA'] -= 1
+    if delete_suco_pessego:
+        if st.session_state['client_order']['SUCO PESSEGO'] > 0:
+            st.session_state['client_order']['SUCO PESSEGO'] -= 1
 
     if delete_guaravita:
         if st.session_state['client_order']['GUARAVITA'] > 0:
@@ -126,10 +134,21 @@ with st.container(border=True):
 
             for item in st.session_state['client_order'].keys():
                 if st.session_state['client_order'][item] != 0:
-                    product_data = session.query(Products).filter(Products.product_name == item).scalar()
-                    statement2 = update(Products).where(Products.product_name == item).values(quantity=product_data.quantity-st.session_state['client_order'][item])
-                    session.execute(statement2)
-                    session.commit()
+                    if item == 'PROMO CHOPP':
+                        product_data = session.query(Products).filter(Products.product_name == 'CHOPP').scalar()
+                        statement2 = update(Products).where(Products.product_name == 'CHOPP').values(quantity=product_data.quantity-st.session_state['client_order'][item]*3)
+                        session.execute(statement2)
+                        session.commit()
+                    elif item == 'PROMO VINHO':
+                        product_data = session.query(Products).filter(Products.product_name == 'VINHO').scalar()
+                        statement2 = update(Products).where(Products.product_name == 'VINHO').values(quantity=product_data.quantity-st.session_state['client_order'][item]*3)
+                        session.execute(statement2)
+                        session.commit()
+                    else:
+                        product_data = session.query(Products).filter(Products.product_name == item).scalar()
+                        statement2 = update(Products).where(Products.product_name == item).values(quantity=product_data.quantity-st.session_state['client_order'][item])
+                        session.execute(statement2)
+                        session.commit()
             
 
             session.add(
@@ -137,7 +156,8 @@ with st.container(border=True):
                     coca = st.session_state['client_order']['COCA'],
                     agua = st.session_state['client_order']['AGUA'],
                     guarana = st.session_state['client_order']['GUARANA'],
-                    suco = st.session_state['client_order']['SUCO'],
+                    suco_maracuja = st.session_state['client_order']['SUCO MARACUJA'],
+                    suco_pessego = st.session_state['client_order']['SUCO PESSEGO'],
                     chopp = st.session_state['client_order']['CHOPP'],
                     promo_chopp = st.session_state['client_order']['PROMO CHOPP'],
                     vinho = st.session_state['client_order']['VINHO'],
@@ -149,5 +169,5 @@ with st.container(border=True):
 
             session.commit()
 
-        st.session_state['client_order'] = {'COCA': 0, 'AGUA':0, 'GUARANA': 0, 'SUCO': 0, 'CHOPP': 0, 'PROMO CHOPP': 0, 'VINHO': 0, 'PROMO VINHO': 0, 'GUARAVITA': 0}
+        st.session_state['client_order'] = {'COCA': 0, 'AGUA':0, 'GUARANA': 0, 'SUCO MARACUJA': 0, 'SUCO PESSEGO': 0, 'CHOPP': 0, 'PROMO CHOPP': 0, 'VINHO': 0, 'PROMO VINHO': 0, 'GUARAVITA': 0}
         st.rerun()
