@@ -17,13 +17,14 @@ class Vendas(BaseClass):
     __tablename__ = 'historico_de_vendas'
 
     id = Column('id', Integer, primary_key=True, autoincrement=True)
-    coca = Column('coca_cola', Integer)
+    coca = Column('coca', Integer)
     agua = Column('agua', Integer)
     guarana = Column('guarana', Integer)
-    ice_tea_pessego = Column('ice_tea_pessego', Integer)
-    ice_tea_limao = Column('ice_tea_limao', Integer)
+    chopp = Column('chopp', Integer)
+    promo_chopp = Column('promo_chopp', Integer)
+    vinho = Column('vinho', Integer)
+    promo_vinho = Column('promo_vinho', Integer)
     suco = Column('suco', Integer)
-    cerveja = Column('cerveja', Integer)
     guaravita = Column('guaravita', Integer)
     total_value = Column('total_value', Float)
 
