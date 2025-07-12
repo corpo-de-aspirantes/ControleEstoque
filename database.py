@@ -29,4 +29,4 @@ class Vendas(BaseClass):
     total_value = Column('total_value', Float)
 
 
-BaseClass.metadata.create_all(create_engine(st.secrets['connections']['postgres']['url']))
+BaseClass.metadata.create_all(create_engine(st.secrets['connections']['postgres']['url'],connect_args={'client_encoding': 'utf8'}))
